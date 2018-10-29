@@ -15,17 +15,24 @@ public class Resource implements Concept {
    private final ObjectProperty< Double > netRate;
    
    public Resource( String name ) {
+      this( name, 0.0, 0.0 );
+   }//End Constructor
+   
+   public Resource( String name, double baseRate, double upRate ) {
       this.properties = new Properties( name );
-      this.baseRate = new SimpleObjectProperty<>( 0.0 );
-      this.upRate = new SimpleObjectProperty<>( 0.0 );
+      this.baseRate = new SimpleObjectProperty<>( baseRate );
+      this.upRate = new SimpleObjectProperty<>( upRate );
       this.netRate = new SimpleObjectProperty<>( 0.0 );
+      this.recalculateNetRate();
       
-      ChangeListener< Double > netCalculator = ( s, o, n ) -> {
-         netRate.set( baseRate.get() * ( 1 + 0.01 * upRate.get() ) ); 
-      };
+      ChangeListener< Double > netCalculator = ( s, o, n ) -> recalculateNetRate();
       this.baseRate.addListener( netCalculator );
       this.upRate.addListener( netCalculator );
    }//End Constructor
+   
+   private void recalculateNetRate(){
+      netRate.set( baseRate.get() * ( 1 + 0.01 * upRate.get() ) );
+   }//End Method
    
    @Override public Properties properties() {
       return properties;

@@ -15,9 +15,14 @@ public class ResourceBudget {
    private final ObjectProperty< Double > costBudget;
    
    public ResourceBudget() {
-      this.resource = new SimpleObjectProperty<>();
-      this.effort = new SimpleObjectProperty<>( 0.0 );
+      this( 0.0, null );
+   }//End Constructor
+   
+   public ResourceBudget( double effort, Resource resource ) {
+      this.resource = new SimpleObjectProperty<>( resource );
+      this.effort = new SimpleObjectProperty<>( effort );
       this.costBudget = new SimpleObjectProperty<>( 0.0 );
+      this.recalculateCostBudget();
       
       this.costBudgetRecalculator = ( s, o, n ) -> recalculateCostBudget();
       
