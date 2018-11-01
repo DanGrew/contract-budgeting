@@ -3,7 +3,6 @@ package uk.dangrew.cb.model.resourcing;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import uk.dangrew.nuts.system.Concept;
 import uk.dangrew.nuts.system.Properties;
 
@@ -19,20 +18,17 @@ public class Resource implements Concept {
    }//End Constructor
    
    public Resource( String name, double baseRate, double upRate ) {
+      this( new NetRateCalculator(), name, baseRate, upRate );
+   }//End Constructor
+   
+   Resource( NetRateCalculator netRateCalculator, String name, double baseRate, double upRate ) {
       this.properties = new Properties( name );
       this.baseRate = new SimpleObjectProperty<>( baseRate );
       this.upRate = new SimpleObjectProperty<>( upRate );
       this.netRate = new SimpleObjectProperty<>( 0.0 );
-      this.recalculateNetRate();
       
-      ChangeListener< Double > netCalculator = ( s, o, n ) -> recalculateNetRate();
-      this.baseRate.addListener( netCalculator );
-      this.upRate.addListener( netCalculator );
+      netRateCalculator.associate( this );
    }//End Constructor
-   
-   private void recalculateNetRate(){
-      netRate.set( baseRate.get() * ( 1 + 0.01 * upRate.get() ) );
-   }//End Method
    
    @Override public Properties properties() {
       return properties;
@@ -48,6 +44,10 @@ public class Resource implements Concept {
 
    public ReadOnlyObjectProperty< Double > netRate() {
       return netRate;
+   }//End Method
+   
+   void setNetRate( double netRate ) {
+      this.netRate.set( netRate );
    }//End Method
 
    @Override public Concept duplicate( String referenceId ) {

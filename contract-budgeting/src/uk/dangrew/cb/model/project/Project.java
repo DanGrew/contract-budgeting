@@ -11,53 +11,64 @@ import javafx.collections.ObservableList;
 import uk.dangrew.cb.model.budget.Budget;
 import uk.dangrew.cb.model.workpackage.WorkPackage;
 import uk.dangrew.kode.observable.PrivatelyModifiableObservableListImpl;
+import uk.dangrew.nuts.system.Concept;
+import uk.dangrew.nuts.system.Properties;
 
-public class Project {
+public class Project implements Concept {
 
-   private final ChangeListener< Double > costBudgetListener;
-   
    private final ObservableList< WorkPackage > workPackages;
-   private final PrivatelyModifiableObservableListImpl< WorkPackage > publicWorkPackages;
    
+   private final Properties properties;
+   private final ObjectProperty< String > contract;
    private final ObjectProperty< Double > internalCostBudget;
    private final ObjectProperty< Double > contractCostBudget;
    
-   public Project() {
-      this.workPackages = FXCollections.observableArrayList();
-      this.publicWorkPackages = new PrivatelyModifiableObservableListImpl<>( workPackages );
-      
-      this.costBudgetListener = ( s, o, n ) -> recalculateCostBudgets();
-      this.internalCostBudget = new SimpleObjectProperty<>( 0.0 );
-      this.contractCostBudget = new SimpleObjectProperty<>( 0.0 );
+   public Project( String name ) {
+      this( new ProjectBudgetCalculator(), name );
    }//End Constructor
    
-   private void recalculateCostBudgets(){
-      internalCostBudget.set( totalWorkPackageBudget( wp -> wp.budget().internalBudget() ) );
-      contractCostBudget.set( totalWorkPackageBudget( wp -> wp.budget().contractBudget() ) );
+   Project( ProjectBudgetCalculator budgetCalculator, String name ) {
+      this.properties = new Properties( name );
+      this.contract = new SimpleObjectProperty<>();
+      
+      this.workPackages = FXCollections.observableArrayList();
+      
+      this.internalCostBudget = new SimpleObjectProperty<>( 0.0 );
+      this.contractCostBudget = new SimpleObjectProperty<>( 0.0 );
+      
+      budgetCalculator.associate( this );
+   }//End Constructor
+   
+   @Override public Properties properties() {
+      return properties;
    }//End Method
    
-   private double totalWorkPackageBudget( Function< WorkPackage, Budget > mapper ){
-      return workPackages.stream()
-               .mapToDouble( wp -> mapper.apply( wp ).costBudget().get() )
-               .sum(); 
+   public ObjectProperty< String > contract(){
+      return contract;
    }//End Method
-
+   
    public ReadOnlyObjectProperty< Double > internalCostBudget() {
       return internalCostBudget;
+   }//End Method
+   
+   void setInternalCostBudget( double costBudget ) {
+      this.internalCostBudget.set( costBudget );
    }//End Method
 
    public ReadOnlyObjectProperty< Double > contractCostBudget() {
       return contractCostBudget;
    }//End Method
-
-   public ObservableList< WorkPackage > workPackages() {
-      return publicWorkPackages;
+   
+   void setContractCostBudget( double costBudget ) {
+      this.contractCostBudget.set( costBudget );
    }//End Method
 
-   public void addWorkPackage( WorkPackage wp ) {
-      wp.budget().internalBudget().costBudget().addListener( costBudgetListener );
-      wp.budget().contractBudget().costBudget().addListener( costBudgetListener );
-      workPackages.add( wp );
+   public ObservableList< WorkPackage > workPackages() {
+      return workPackages;
+   }//End Method
+
+   @Override public Concept duplicate( String referenceId ) {
+      throw new UnsupportedOperationException();
    }//End Method
    
 }//End Class

@@ -37,18 +37,18 @@ public class BudgetTest {
 
    @Test public void shouldProvideCostBudget() {
       assertThat( systemUnderTest.costBudget().get(), is( 0.0 ) );
-      systemUnderTest.addResourceBudget( resourceBudget1 );
+      systemUnderTest.resources().add( resourceBudget1 );
       assertThat( systemUnderTest.costBudget().get(), is( 45.0 * 500 ) );
-      systemUnderTest.addResourceBudget( resourceBudget2 );
+      systemUnderTest.resources().add( resourceBudget2 );
       assertThat( systemUnderTest.costBudget().get(), is( 45.0 * 500 + 10 * 600 ) );
-      systemUnderTest.removeResourceBudget( resourceBudget2 );
+      systemUnderTest.resources().remove( resourceBudget2 );
       assertThat( systemUnderTest.costBudget().get(), is( 45.0 * 500 ) );
    }//End Method
    
    @Test public void shouldRespondToBudgetChanges() {
       assertThat( systemUnderTest.costBudget().get(), is( 0.0 ) );
-      systemUnderTest.addResourceBudget( resourceBudget1 );
-      systemUnderTest.addResourceBudget( resourceBudget2 );
+      systemUnderTest.resources().add( resourceBudget1 );
+      systemUnderTest.resources().add( resourceBudget2 );
       assertThat( systemUnderTest.costBudget().get(), is( 45.0 * 500 + 10 * 600 ) );
       
       resourceBudget1.resource().get().baseRate().set( 250.0 );
