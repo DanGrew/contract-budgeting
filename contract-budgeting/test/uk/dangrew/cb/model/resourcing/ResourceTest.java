@@ -42,5 +42,16 @@ public class ResourceTest {
       systemUnderTest.upRate().set( 20.0 );
       assertThat( systemUnderTest.netRate().get(), is( 120.0 ) );
    }//End Method
+   
+   @Test public void shouldDuplicate(){
+      systemUnderTest.baseRate().set( 200.0 );
+      systemUnderTest.upRate().set( 5.0 );
+      assertThat( systemUnderTest.netRate().get(), is( 210.0 ) );
+      
+      Resource copy = systemUnderTest.duplicate();
+      assertThat( copy.baseRate().get(), is( 200.0 ) );
+      assertThat( copy.upRate().get(), is( 5.0 ) );
+      assertThat( copy.netRate().get(), is( 210.0 ) );
+   }//End Method
 
 }//End Class

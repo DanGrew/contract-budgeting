@@ -17,12 +17,20 @@ public class Resource implements Concept {
       this( name, 0.0, 0.0 );
    }//End Constructor
    
-   public Resource( String name, double baseRate, double upRate ) {
-      this( new NetRateCalculator(), name, baseRate, upRate );
+   public Resource( String id, String name ) {
+      this( id, name, 0.0, 0.0 );
    }//End Constructor
    
-   Resource( NetRateCalculator netRateCalculator, String name, double baseRate, double upRate ) {
-      this.properties = new Properties( name );
+   public Resource( String name, double baseRate, double upRate ) {
+      this( new NetRateCalculator(), new Properties( name ), baseRate, upRate );
+   }//End Constructor
+   
+   public Resource( String id, String name, double baseRate, double upRate ) {
+      this( new NetRateCalculator(), new Properties( id, name ), baseRate, upRate );
+   }//End Constructor
+   
+   Resource( NetRateCalculator netRateCalculator, Properties properties, double baseRate, double upRate ) {
+      this.properties = properties;
       this.baseRate = new SimpleObjectProperty<>( baseRate );
       this.upRate = new SimpleObjectProperty<>( upRate );
       this.netRate = new SimpleObjectProperty<>( 0.0 );
@@ -50,8 +58,11 @@ public class Resource implements Concept {
       this.netRate.set( netRate );
    }//End Method
 
-   @Override public Concept duplicate( String referenceId ) {
-      throw new UnsupportedOperationException();
+   @Override public Resource duplicate() {
+      Resource copy = new Resource( properties().nameProperty().get() + "(copy)" );
+      copy.baseRate().set( baseRate().get() );
+      copy.upRate().set( upRate().get() );
+      return copy;
    }//End Method
 
 }//End Class

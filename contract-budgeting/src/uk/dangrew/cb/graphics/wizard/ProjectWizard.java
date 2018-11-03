@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import uk.dangrew.cb.model.project.Project;
-import uk.dangrew.kode.javafx.style.JavaFxStyle;
+import uk.dangrew.cb.toolkit.Database;
 
 public class ProjectWizard extends BorderPane {
 
@@ -14,8 +14,8 @@ public class ProjectWizard extends BorderPane {
    private final Button previous;
    private final Button ok;
    
-   public ProjectWizard( Project project ) {
-      this( new ProjectWizardPageController( project ) );
+   public ProjectWizard( Database database, Project project ) {
+      this( new ProjectWizardPageController( database, project ) );
    }//End Constructor
    
    ProjectWizard( ProjectWizardPageController controller ) {

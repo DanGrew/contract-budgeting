@@ -62,7 +62,7 @@ public class Project implements Concept {
       return workPackages;
    }//End Method
 
-   @Override public Concept duplicate( String referenceId ) {
+   @Override public Project duplicate() {
       throw new UnsupportedOperationException();
    }//End Method
    

@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.cb.model.project.Project;
 import uk.dangrew.cb.progress.project.ProjectTestData;
+import uk.dangrew.cb.toolkit.Database;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class ProjectWizardTest {
@@ -28,6 +29,7 @@ public class ProjectWizardTest {
 
    @Ignore
    @Test public void manual() throws InterruptedException {
+      systemUnderTest = new ProjectWizard( new Database(), project );
       TestApplication.launch( () -> systemUnderTest, false );
       
       Thread.sleep( 99999999 );
