@@ -3,8 +3,8 @@ package uk.dangrew.cb.model.resourcing;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import uk.dangrew.nuts.system.Concept;
-import uk.dangrew.nuts.system.Properties;
+import uk.dangrew.kode.concept.Concept;
+import uk.dangrew.kode.concept.Properties;
 
 public class Resource implements Concept {
 

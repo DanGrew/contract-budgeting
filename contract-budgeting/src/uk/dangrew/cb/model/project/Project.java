@@ -1,18 +1,13 @@
 package uk.dangrew.cb.model.project;
 
-import java.util.function.Function;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import uk.dangrew.cb.model.budget.Budget;
 import uk.dangrew.cb.model.workpackage.WorkPackage;
-import uk.dangrew.kode.observable.PrivatelyModifiableObservableListImpl;
-import uk.dangrew.nuts.system.Concept;
-import uk.dangrew.nuts.system.Properties;
+import uk.dangrew.kode.concept.Concept;
+import uk.dangrew.kode.concept.Properties;
 
 public class Project implements Concept {
 
