@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 public class Budget {
 
    private final ObjectProperty< Double > costBudget;
+   private final ObjectProperty< Double > totalEffort;
    private final ObservableList< ResourceBudget > resources;
    
    public Budget() {
@@ -17,6 +18,7 @@ public class Budget {
    
    Budget( BudgetCalculator budgetCalculator ) {
       this.costBudget = new SimpleObjectProperty<>( 0.0 );
+      this.totalEffort = new SimpleObjectProperty<>( 0.0 );
       this.resources = FXCollections.observableArrayList();
       
       budgetCalculator.associate( this );
@@ -33,5 +35,13 @@ public class Budget {
    void setCostBudget( double costBudget ) {
       this.costBudget.set( costBudget );
    }//End Method
-
+   
+   public ReadOnlyObjectProperty< Double > totalEffort() {
+      return totalEffort;
+   }//End Method
+   
+   void setTotalEffort( double effort ) {
+      this.totalEffort.set( effort );
+   }//End Method
+   
 }//End Class

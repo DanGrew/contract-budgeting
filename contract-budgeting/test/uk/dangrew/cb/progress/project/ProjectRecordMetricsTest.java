@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.cb.model.project.Project;
 import uk.dangrew.cb.progress.workpackage.WorkPackageProgress;
+import uk.dangrew.cb.toolkit.Database;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class ProjectRecordMetricsTest {
@@ -21,7 +22,7 @@ public class ProjectRecordMetricsTest {
       TestApplication.startPlatform();
       MockitoAnnotations.initMocks( this );
       
-      project = ProjectTestData.sampleProject();
+      project = ProjectTestData.sampleProject( new Database() );
       systemUnderTest = new ProjectRecordMetrics();
       projectRecord = new ProjectRecord( systemUnderTest, project );
    }//End Method

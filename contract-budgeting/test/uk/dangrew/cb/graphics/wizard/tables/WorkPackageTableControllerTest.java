@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import uk.dangrew.cb.model.project.Project;
 import uk.dangrew.cb.model.workpackage.WorkPackage;
 import uk.dangrew.cb.progress.project.ProjectTestData;
+import uk.dangrew.cb.toolkit.Database;
 import uk.dangrew.kode.launch.TestApplication;
 import uk.dangrew.nuts.graphics.table.ConceptTable;
 
@@ -23,7 +24,7 @@ public class WorkPackageTableControllerTest {
    @Before public void initialiseSystemUnderTest() {
       TestApplication.startPlatform();
       MockitoAnnotations.initMocks( this );
-      project = ProjectTestData.sampleProject();
+      project = ProjectTestData.sampleProject( new Database() );
       systemUnderTest = new WorkPackageTableController( project );
       table = new ConceptTable<>( new WorkPackageColumns(), systemUnderTest );
    }//End Method

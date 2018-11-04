@@ -25,7 +25,7 @@ public class BudgetCalculatorTest {
       budget = new Budget( systemUnderTest );
    }//End Method
 
-   @Test public void shouldRespondToResources() {
+   @Test public void shouldProvideCostBudget() {
       assertThat( budget.costBudget().get(), is( closeTo( 0.0, precision() ) ) );
       budget.resources().add( new ResourceBudget( 10.0, new Resource( "PM", 500.0, 0.0 ) ) );
       assertThat( budget.costBudget().get(), is( closeTo( 5000.0, precision() ) ) );
@@ -33,6 +33,19 @@ public class BudgetCalculatorTest {
       assertThat( budget.costBudget().get(), is( closeTo( 5600.0, precision() ) ) );
       budget.resources().remove( budget.resources().get( 0 ) );
       assertThat( budget.costBudget().get(), is( closeTo( 600.0, precision() ) ) );
+      
+      budget.resources().get( 0 ).resource().get().baseRate().set( 400.0 );
+      assertThat( budget.costBudget().get(), is( closeTo( 400.0, precision() ) ) );
+   }//End Method
+   
+   @Test public void shouldProvideTotalEffort() {
+      assertThat( budget.totalEffort().get(), is( closeTo( 0.0, precision() ) ) );
+      budget.resources().add( new ResourceBudget( 10.0, new Resource( "PM", 500.0, 0.0 ) ) );
+      assertThat( budget.totalEffort().get(), is( closeTo( 10.0, precision() ) ) );
+      budget.resources().add( new ResourceBudget( 1.0, new Resource( "PM2", 600.0, 0.0 ) ) );
+      assertThat( budget.totalEffort().get(), is( closeTo( 11.0, precision() ) ) );
+      budget.resources().remove( budget.resources().get( 0 ) );
+      assertThat( budget.totalEffort().get(), is( closeTo( 1.0, precision() ) ) );
    }//End Method
    
    @Test public void shouldRespondToResourceChanges() {

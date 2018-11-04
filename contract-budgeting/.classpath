@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry combineaccessrules="false" kind="src" path="/dag-kode"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/">
 		<accessrules>
 			<accessrule kind="accessible" pattern="**"/>
@@ -12,8 +12,6 @@
 	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/dom4j/dom4j/1.6.1/5d3ccc056b6f056dbf0dddfdf43894b9065a8f94/dom4j-1.6.1.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/dom4j/dom4j/1.6.1/a8e7149359255f43e0e5e3b1837948f9ed5861fb/dom4j-1.6.1-sources.jar"/>
 	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.4/2f8a3c0c53550b237d8f7a98a417397395af8b80/httpclient-4.5.4.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.4/67fd2133e2289b0f21b5c686ecb4194aa421e173/httpclient-4.5.4-sources.jar"/>
 	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.json/json/20151123/1675d5c1142000dedd6627a73af26a8b885ef0e1/json-20151123.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.json/json/20151123/9c179a1becb79c6af729c89f7b212b1cb5e68da3/json-20151123-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/uk.dangrew/dag-kode/1.0.36/80fa7d69ea74ada1e8a1c61d9db3cd6ae91e233e/dag-kode-1.0.36.jar"/>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/uk.dangrew/dag-kode/1.0.36/c67b083eeaa8d1ec04f001d3486aa4d31fb0ad36/dag-kode-1.0.36-tests.jar"/>
 	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/SystemDigest/SystemDigest/1.2.52/2b86a51af1dcf37b33e73b7b851f70c808847504/SystemDigest-1.2.52.jar"/>
 	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/SystemDigest/SystemDigest/1.2.52/f67eb92de083d2a99587b59abf8546e512f76cae/SystemDigest-1.2.52-tests.jar"/>
 	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/jupa/JsonUpgradingPersistenceArchitecture/1.1.63/c30cf6e86f8192c14de0143a60dc04fff82b8b8e/JsonUpgradingPersistenceArchitecture-1.1.63.jar"/>
@@ -36,6 +34,5 @@
 	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.2/7a87d845ad3a155297e8f67d9008f4c1e5656b71/commons-beanutils-1.9.2.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.2/53746de93a0b30f346c082074a40c01a6cebdfa7/commons-beanutils-1.9.2-sources.jar"/>
 	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.1/761ea405b9b37ced573d2df0d1e3a4e0f9edc668/commons-collections-3.2.1.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.1/fa095ef874374e5b2a11f8b06c26a5d68c7cb3a4/commons-collections-3.2.1-sources.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/nuts"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

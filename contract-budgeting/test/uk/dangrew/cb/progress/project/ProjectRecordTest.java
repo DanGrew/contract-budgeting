@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.cb.model.project.Project;
+import uk.dangrew.cb.toolkit.Database;
 import uk.dangrew.kode.launch.TestApplication;
 import uk.dangrew.kode.model.ModelVerifier;
 
@@ -20,7 +21,7 @@ public class ProjectRecordTest {
       TestApplication.startPlatform();
       MockitoAnnotations.initMocks( this );
       
-      project = ProjectTestData.sampleProject();
+      project = ProjectTestData.sampleProject( new Database() );
       systemUnderTest = new ProjectRecord( project );
    }//End Method
 

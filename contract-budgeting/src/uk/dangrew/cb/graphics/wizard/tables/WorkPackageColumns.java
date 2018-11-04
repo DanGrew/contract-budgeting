@@ -25,7 +25,7 @@ public class WorkPackageColumns implements ConceptTableColumnsPopulator< WorkPac
                new TableViewColumnConfigurer<>( table ), 
                NAME_COLUMN_TEXT, 
                NAME_COLUMN_WIDTH, 
-               WorkPackage::name, 
+               wp -> wp.properties().nameProperty(), 
                true 
       );
    }//End Method

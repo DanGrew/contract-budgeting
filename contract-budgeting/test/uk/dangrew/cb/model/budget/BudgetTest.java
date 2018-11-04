@@ -45,6 +45,16 @@ public class BudgetTest {
       assertThat( systemUnderTest.costBudget().get(), is( 45.0 * 500 ) );
    }//End Method
    
+   @Test public void shouldProvideTotalEffort() {
+      assertThat( systemUnderTest.totalEffort().get(), is( 0.0 ) );
+      systemUnderTest.resources().add( resourceBudget1 );
+      assertThat( systemUnderTest.totalEffort().get(), is( 45.0 ) );
+      systemUnderTest.resources().add( resourceBudget2 );
+      assertThat( systemUnderTest.totalEffort().get(), is( 45.0 + 10 ) );
+      systemUnderTest.resources().remove( resourceBudget2 );
+      assertThat( systemUnderTest.totalEffort().get(), is( 45.0 ) );
+   }//End Method
+   
    @Test public void shouldRespondToBudgetChanges() {
       assertThat( systemUnderTest.costBudget().get(), is( 0.0 ) );
       systemUnderTest.resources().add( resourceBudget1 );

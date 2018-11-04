@@ -17,19 +17,27 @@ public class Project implements Concept {
    private final ObjectProperty< String > contract;
    private final ObjectProperty< Double > internalCostBudget;
    private final ObjectProperty< Double > contractCostBudget;
+   private final ObjectProperty< Double > totalInternalEffort;
+   private final ObjectProperty< Double > totalContractEffort;
    
    public Project( String name ) {
-      this( new ProjectBudgetCalculator(), name );
+      this( new ProjectBudgetCalculator(), new Properties( name ) );
    }//End Constructor
    
-   Project( ProjectBudgetCalculator budgetCalculator, String name ) {
-      this.properties = new Properties( name );
+   public Project( String id, String name ) {
+      this( new ProjectBudgetCalculator(), new Properties( id, name ) );
+   }//End Constructor
+   
+   Project( ProjectBudgetCalculator budgetCalculator, Properties properties ) {
+      this.properties = properties;
       this.contract = new SimpleObjectProperty<>();
       
       this.workPackages = FXCollections.observableArrayList();
       
       this.internalCostBudget = new SimpleObjectProperty<>( 0.0 );
       this.contractCostBudget = new SimpleObjectProperty<>( 0.0 );
+      this.totalInternalEffort = new SimpleObjectProperty<>( 0.0 );
+      this.totalContractEffort = new SimpleObjectProperty<>( 0.0 );
       
       budgetCalculator.associate( this );
    }//End Constructor
@@ -57,6 +65,22 @@ public class Project implements Concept {
    void setContractCostBudget( double costBudget ) {
       this.contractCostBudget.set( costBudget );
    }//End Method
+   
+   public ReadOnlyObjectProperty< Double > totalContractEffort() {
+      return totalContractEffort;
+   }//End Method
+   
+   void setTotalContractEffort( double effort ) {
+      this.totalContractEffort.set( effort );
+   }//End Method
+   
+   public ReadOnlyObjectProperty< Double > totalInternalEffort() {
+      return totalInternalEffort;
+   }//End Method
+   
+   void setTotalInternalEffort( double effort ) {
+      this.totalInternalEffort.set( effort );
+ }//End Method
 
    public ObservableList< WorkPackage > workPackages() {
       return workPackages;

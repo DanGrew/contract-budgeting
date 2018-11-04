@@ -19,5 +19,5 @@ public class BudgetRecord {
    public Budget contractBudget() {
       return contractBudget;
    }//End Method
-
+   
 }//End Class

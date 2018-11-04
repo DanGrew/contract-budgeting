@@ -22,7 +22,7 @@ public class WorkPackageTest {
    }//End Method
 
    @Test public void shouldProvideName() {
-      assertThat( systemUnderTest.name().get(), is( "myWorkpackage" ) );
+      assertThat( systemUnderTest.properties().nameProperty().get(), is( "myWorkpackage" ) );
    }//End Method
    
    @Test public void shouldProvideBudget() {

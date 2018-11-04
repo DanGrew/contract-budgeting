@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import uk.dangrew.cb.model.project.Project;
 import uk.dangrew.cb.progress.project.ProjectTestData;
+import uk.dangrew.cb.toolkit.Database;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class ProjectWizardPageControllerTest {
@@ -29,7 +30,7 @@ public class ProjectWizardPageControllerTest {
    @Before public void initialiseSystemUnderTest() {
       TestApplication.startPlatform();
       MockitoAnnotations.initMocks( this );
-      project = ProjectTestData.sampleProject();
+      project = ProjectTestData.sampleProject( new Database() );
       pages = Arrays.asList( new BorderPane(), new GridPane() );
       systemUnderTest = new ProjectWizardPageController( pages, project );
       wizard = new ProjectWizard( systemUnderTest );

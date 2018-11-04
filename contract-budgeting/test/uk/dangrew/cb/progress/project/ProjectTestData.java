@@ -4,16 +4,18 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import uk.dangrew.cb.model.budget.ResourceBudget;
+import uk.dangrew.cb.model.concepts.ConceptFactory;
 import uk.dangrew.cb.model.project.Project;
 import uk.dangrew.cb.model.resourcing.Resource;
 import uk.dangrew.cb.model.workpackage.WorkPackage;
+import uk.dangrew.cb.toolkit.Database;
 
 public class ProjectTestData {
 
-   public static Project sampleProject(){
-      Resource r1 = new Resource( "PM" );
+   public static Project sampleProject( Database database ){
+      Resource r1 = database.storeFor( ConceptFactory.resource() ).createConcept( "PM" );
       r1.baseRate().set( 600.0 );
-      Resource r2 = new Resource( "Developer" );
+      Resource r2 = database.storeFor( ConceptFactory.resource() ).createConcept( "Developer" );
       r2.baseRate().set( 500.0 );
       
       WorkPackage wp1 = new WorkPackage( "WP1" );
@@ -31,7 +33,7 @@ public class ProjectTestData {
       wp2.budget().internalBudget().resources().add( new ResourceBudget( 10, r1 ) );
       wp2.budget().internalBudget().resources().add( new ResourceBudget( 50, r2 ) );
       
-      Project project = new Project( "Project" );
+      Project project = database.storeFor( ConceptFactory.project() ).createConcept( "Project" );
       project.workPackages().add( wp1 );
       project.workPackages().add( wp2 );
       

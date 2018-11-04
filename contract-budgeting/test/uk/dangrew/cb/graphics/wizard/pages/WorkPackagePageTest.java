@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.cb.model.project.Project;
 import uk.dangrew.cb.progress.project.ProjectTestData;
+import uk.dangrew.cb.toolkit.Database;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class WorkPackagePageTest {
@@ -20,7 +21,7 @@ public class WorkPackagePageTest {
    @Before public void initialiseSystemUnderTest() {
       TestApplication.startPlatform();
       MockitoAnnotations.initMocks( this );
-      project = ProjectTestData.sampleProject();
+      project = ProjectTestData.sampleProject( new Database() );
       systemUnderTest = new WorkPackagePage( project );
    }//End Method
 

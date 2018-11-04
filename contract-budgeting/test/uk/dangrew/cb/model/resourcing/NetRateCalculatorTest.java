@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import uk.dangrew.cb.model.resourcing.NetRateCalculator;
 import uk.dangrew.cb.model.resourcing.Resource;
 import uk.dangrew.kode.TestCommon;
+import uk.dangrew.kode.concept.Properties;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class NetRateCalculatorTest {
@@ -24,7 +25,7 @@ public class NetRateCalculatorTest {
       TestApplication.startPlatform();
       MockitoAnnotations.initMocks( this );
       systemUnderTest = new NetRateCalculator();
-      resource = new Resource( systemUnderTest, "Developer", 0.0, 0.0 );
+      resource = new Resource( systemUnderTest, new Properties( "Developer" ), 0.0, 0.0 );
    }//End Method
 
    @Test public void shouldRespondToRateChanges() {

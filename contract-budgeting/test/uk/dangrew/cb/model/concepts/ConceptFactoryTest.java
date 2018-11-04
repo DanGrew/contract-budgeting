@@ -3,7 +3,6 @@ package uk.dangrew.cb.model.concepts;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +23,9 @@ public class ConceptFactoryTest {
    @Test public void shouldProvideConcepts() {
       assertThat( systemUnderTest.resource(), is( notNullValue() ) );
       assertThat( systemUnderTest.resource(), is( systemUnderTest.resource() ) );
+      
+      assertThat( systemUnderTest.project(), is( notNullValue() ) );
+      assertThat( systemUnderTest.project(), is( systemUnderTest.project() ) );
    }//End Method
 
 }//End Class

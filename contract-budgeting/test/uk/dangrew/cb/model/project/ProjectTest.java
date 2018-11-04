@@ -65,5 +65,30 @@ public class ProjectTest {
       systemUnderTest.workPackages().add( firstWorkPackage );
       assertThat( systemUnderTest.contractCostBudget().get(), is( not( 0.0 ) ) );
    }//End Method
+   
+   @Test public void shouldUpdateTotalEffortWhenEffortChanges(){
+      assertThat( systemUnderTest.totalContractEffort().get(), is( 0.0 ) );
+      assertThat( systemUnderTest.totalInternalEffort().get(), is( 0.0 ) );
+      
+      firstWorkPackage.budget().contractBudget().resources().add( new ResourceBudget( 10, new Resource( "" ) ) );
+      assertThat( systemUnderTest.totalContractEffort().get(), is( 10.0 ) );
+      assertThat( systemUnderTest.totalInternalEffort().get(), is( 0.0 ) );
+      
+      firstWorkPackage.budget().internalBudget().resources().add( new ResourceBudget( 5, new Resource( "" ) ) );
+      assertThat( systemUnderTest.totalContractEffort().get(), is( 10.0 ) );
+      assertThat( systemUnderTest.totalInternalEffort().get(), is( 5.0 ) );
+      
+      systemUnderTest.workPackages().remove( firstWorkPackage );
+      assertThat( systemUnderTest.totalContractEffort().get(), is( 0.0 ) );
+      assertThat( systemUnderTest.totalInternalEffort().get(), is( 0.0 ) );
+      
+      systemUnderTest.workPackages().add( firstWorkPackage );
+      assertThat( systemUnderTest.totalContractEffort().get(), is( 10.0 ) );
+      assertThat( systemUnderTest.totalInternalEffort().get(), is( 5.0 ) );
+      
+      firstWorkPackage.budget().contractBudget().resources().get( 0 ).effort().set( 20.0 );
+      assertThat( systemUnderTest.totalContractEffort().get(), is( 20.0 ) );
+      assertThat( systemUnderTest.totalInternalEffort().get(), is( 5.0 ) );
+   }//End Method
 
 }//End Class

@@ -16,6 +16,7 @@ import uk.dangrew.kode.launch.TestApplication;
 public class ProjectWizardTest {
    
    @Mock private ProjectWizardPageController controller;
+   private Database database;
    private Project project;
    private ProjectWizard systemUnderTest;
 
@@ -23,13 +24,13 @@ public class ProjectWizardTest {
       TestApplication.startPlatform();
       MockitoAnnotations.initMocks( this );
       
-      project = ProjectTestData.sampleProject();
+      project = ProjectTestData.sampleProject( database = new Database() );
       systemUnderTest = new ProjectWizard( controller );
    }//End Method
 
    @Ignore
    @Test public void manual() throws InterruptedException {
-      systemUnderTest = new ProjectWizard( new Database(), project );
+      systemUnderTest = new ProjectWizard( database, project );
       TestApplication.launch( () -> systemUnderTest, false );
       
       Thread.sleep( 99999999 );

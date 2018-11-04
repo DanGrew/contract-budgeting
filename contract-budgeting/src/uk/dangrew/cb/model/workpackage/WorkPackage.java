@@ -1,25 +1,29 @@
 package uk.dangrew.cb.model.workpackage;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import uk.dangrew.cb.model.budget.BudgetRecord;
+import uk.dangrew.kode.concept.Concept;
+import uk.dangrew.kode.concept.Properties;
 
-public class WorkPackage {
+public class WorkPackage implements Concept {
    
-   private final ObjectProperty< String > name;
+   private final Properties properties;
    private final BudgetRecord budget;
    
    public WorkPackage( String name ) {
-      this.name = new SimpleObjectProperty<>( name );
+      this.properties = new Properties( name );
       this.budget = new BudgetRecord();
    }//End Constructor
    
-   public ObjectProperty< String > name() {
-      return name;
+   @Override public Properties properties() {
+      return properties;
    }//End Method
-
+   
    public BudgetRecord budget() {
       return budget;
+   }//End Method
+   
+   @Override public Concept duplicate() {
+      throw new UnsupportedOperationException();
    }//End Method
 
 }//End Class

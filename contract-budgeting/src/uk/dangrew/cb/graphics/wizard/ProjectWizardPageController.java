@@ -6,8 +6,11 @@ import java.util.List;
 
 import javafx.scene.Node;
 import uk.dangrew.cb.graphics.wizard.pages.ProjectSetupPage;
+import uk.dangrew.cb.graphics.wizard.pages.ProjectSummaryPage;
 import uk.dangrew.cb.graphics.wizard.pages.ResourcePage;
 import uk.dangrew.cb.graphics.wizard.pages.WorkPackagePage;
+import uk.dangrew.cb.graphics.wizard.pages.WorkPackageResourceEntryPage;
+import uk.dangrew.cb.model.budget.BudgetType;
 import uk.dangrew.cb.model.concepts.ConceptFactory;
 import uk.dangrew.cb.model.project.Project;
 import uk.dangrew.cb.toolkit.Database;
@@ -25,7 +28,10 @@ public class ProjectWizardPageController {
                Arrays.asList( 
                   new ProjectSetupPage( project ),
                   new WorkPackagePage( project ),
-                  new ResourcePage( database.storeFor( new ConceptFactory().resource() ) )
+                  new ResourcePage( database.storeFor( ConceptFactory.resource() ) ),
+                  new WorkPackageResourceEntryPage( project, database.storeFor( ConceptFactory.resource() ), BudgetType.Contract ),
+                  new WorkPackageResourceEntryPage( project, database.storeFor( ConceptFactory.resource() ), BudgetType.Internal ),
+                  new ProjectSummaryPage( project )
                ), 
                project 
       );

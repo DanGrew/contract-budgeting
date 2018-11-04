@@ -52,7 +52,7 @@ public class WorkPackageColumnsTest {
       assertThat( columnConfigurerCaptor.getValue(), is( instanceOf( TableViewColumnConfigurer.class ) ) );
       
       WorkPackage wp = new WorkPackage( "Anything" );
-      assertThat( propertyRetrieverCaptor.getValue().apply( wp ), is( wp.name() ) );
+      assertThat( propertyRetrieverCaptor.getValue().apply( wp ), is( wp.properties().nameProperty() ) );
    }//End Method
 
 }//End Class

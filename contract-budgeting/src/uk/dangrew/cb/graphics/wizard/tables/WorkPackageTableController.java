@@ -54,7 +54,7 @@ public class WorkPackageTableController implements ConceptTableViewController< W
          return;
       }
       
-      this.project.workPackages().add( new WorkPackage( selection.concept().name().get() ) );
+      this.project.workPackages().add( new WorkPackage( selection.concept().properties().nameProperty().get() ) );
    }//End Method
 
 }//End Class
