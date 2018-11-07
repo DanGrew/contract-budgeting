@@ -87,7 +87,12 @@ public class Project implements Concept {
    }//End Method
 
    @Override public Project duplicate() {
-      throw new UnsupportedOperationException();
+      Project copy = new Project( properties().nameProperty().get() + "(copy)" );
+      copy.contract.set( contract().get() );
+      for ( WorkPackage workPackage : workPackages ) {
+         copy.workPackages.add( new WorkPackage( workPackage.properties().nameProperty().get() ) );
+      }
+      return copy;
    }//End Method
    
 }//End Class

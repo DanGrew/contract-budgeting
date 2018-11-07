@@ -34,6 +34,7 @@ public class ProjectTestData {
       wp2.budget().internalBudget().resources().add( new ResourceBudget( 50, r2 ) );
       
       Project project = database.storeFor( ConceptFactory.project() ).createConcept( "Project" );
+      project.contract().set( "C234" );
       project.workPackages().add( wp1 );
       project.workPackages().add( wp2 );
       

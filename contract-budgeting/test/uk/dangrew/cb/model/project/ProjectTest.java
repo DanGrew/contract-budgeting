@@ -1,5 +1,6 @@
 package uk.dangrew.cb.model.project;
 
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -13,6 +14,8 @@ import org.mockito.MockitoAnnotations;
 import uk.dangrew.cb.model.budget.ResourceBudget;
 import uk.dangrew.cb.model.resourcing.Resource;
 import uk.dangrew.cb.model.workpackage.WorkPackage;
+import uk.dangrew.cb.progress.project.ProjectTestData;
+import uk.dangrew.cb.toolkit.Database;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class ProjectTest {
@@ -89,6 +92,25 @@ public class ProjectTest {
       firstWorkPackage.budget().contractBudget().resources().get( 0 ).effort().set( 20.0 );
       assertThat( systemUnderTest.totalContractEffort().get(), is( 20.0 ) );
       assertThat( systemUnderTest.totalInternalEffort().get(), is( 5.0 ) );
+   }//End Method
+   
+   @Test public void shouldDuplicateBasePropertiesAndWorkPackages(){
+      systemUnderTest = ProjectTestData.sampleProject( new Database() );
+      Project copy = systemUnderTest.duplicate();
+      assertThat( copy.properties().nameProperty().get(), is( systemUnderTest.properties().nameProperty().get() + "(copy)" ) );
+      assertThat( copy.contract().get(), is( systemUnderTest.contract().get() ) );
+      
+      int wpCount = 0;
+      for ( WorkPackage workPackage : systemUnderTest.workPackages() ) {
+         assertThat( copy.workPackages().get( wpCount ).properties().nameProperty().get(), is( workPackage.properties().nameProperty().get() ) );
+         assertThat( copy.workPackages().get( wpCount ).budget().internalBudget().resources(), is( empty() ) );
+         assertThat( copy.workPackages().get( wpCount ).budget().contractBudget().resources(), is( empty() ) );
+         wpCount++;
+      }
+      assertThat( copy.totalContractEffort().get(), is( 0.0 ) );
+      assertThat( copy.totalInternalEffort().get(), is( 0.0 ) );
+      assertThat( copy.contractCostBudget().get(), is( 0.0 ) );
+      assertThat( copy.internalCostBudget().get(), is( 0.0 ) );
    }//End Method
 
 }//End Class
